@@ -1,0 +1,7 @@
+{
+  "description": "UAE Smart Food Consultant powered by Gemini.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "name": "UAE Foodie AI"
+}

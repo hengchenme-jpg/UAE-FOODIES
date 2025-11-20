@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#050505">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="UAE Eats">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3448/3448609.png">
+    <title>UAE Foodie AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      :root {
+        /* Light Mode Background */
+        --bg-color: #f8f9fa;
+        --text-color: #1e293b;
+        --glass-nav: rgba(255, 255, 255, 0.85);
+        --glass-nav-border: rgba(0, 0, 0, 0.05);
+        /* Illustrative Food Background (Light) + UAE Gradients */
+        --bg-image: 
+          linear-gradient(to bottom, rgba(255,255,255, 0.85) 0%, rgba(248,249,250, 0.92) 100%),
+          radial-gradient(circle at 0% 0%, rgba(206, 17, 38, 0.1) 0%, transparent 30%),
+          radial-gradient(circle at 100% 0%, rgba(0, 115, 47, 0.1) 0%, transparent 30%),
+          url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=1770&auto=format&fit=crop');
+      }
+
+      :root.dark {
+        /* Dark Mode Background */
+        --bg-color: #050505;
+        --text-color: #ffffff;
+        --glass-nav: rgba(5, 5, 5, 0.85);
+        --glass-nav-border: rgba(255, 255, 255, 0.05);
+        /* Illustrative Food Background (Dark) + UAE Gradients */
+        --bg-image: 
+          linear-gradient(to bottom, rgba(5, 5, 5, 0.85) 0%, rgba(5, 5, 5, 0.95) 100%),
+          radial-gradient(circle at 0% 0%, rgba(206, 17, 38, 0.2) 0%, transparent 40%),
+          radial-gradient(circle at 100% 0%, rgba(0, 115, 47, 0.2) 0%, transparent 40%),
+          url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1770&auto=format&fit=crop');
+      }
+
+      body {
+        font-family: 'Outfit', sans-serif;
+        background-color: var(--bg-color);
+        background-image: var(--bg-image);
+        background-size: 100% 100%, 100% 100%, 100% 100%, cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        color: var(--text-color);
+        min-height: 100vh;
+        -webkit-tap-highlight-color: transparent;
+        transition: background 0.5s ease, color 0.3s ease;
+      }
+      
+      /* Custom Animations */
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+      }
+      
+      @keyframes pulse-glow {
+        0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+        70% { box-shadow: 0 0 0 20px rgba(99, 102, 241, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+      }
+
+      @keyframes slide-up {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      .animate-float { animation: float 6s ease-in-out infinite; }
+      .animate-pulse-glow { animation: pulse-glow 2s infinite; }
+      .animate-slide-up { animation: slide-up 0.5s ease-out forwards; }
+
+      /* Utilities */
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      
+      .glass-nav {
+        background: var(--glass-nav);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--glass-nav-border);
+        transition: background 0.3s ease, border 0.3s ease;
+      }
+
+      /* Default Glass Card (Light) */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        transition: all 0.3s ease;
+      }
+
+      /* Dark Mode Glass Card overrides */
+      .dark .glass-card {
+        background: linear-gradient(180deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.5) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.3);
+      }
+      
+      .glass-pill {
+        background: rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(4px);
+        transition: all 0.3s ease;
+      }
+
+      .dark .glass-pill {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').then(registration => {
+        console.log('SW registered: ', registration);
+      }).catch(registrationError => {
+        console.log('SW registration failed: ', registrationError);
+      });
+    });
+  }
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
